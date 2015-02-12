@@ -22,9 +22,10 @@
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="//api-maps.yandex.ru/2.0/?load=package.standard,package.geoObjects,package.clusters&lang=ru-RU" type="text/javascript"></script>
-<script src="map-yandex-api.js" type="text/javascript"></script>
+<script src="js/app.js" type="text/javascript"></script>
 
 <script type="text/javascript">
+    var docState = {id: 1};
     ymaps.ready(init);
 </script>
 </body>

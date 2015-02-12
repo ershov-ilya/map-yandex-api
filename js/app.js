@@ -1,5 +1,11 @@
 /**
- * Created by IErshov on 12.02.2015.
+ * Created by PhpStorm.
+ * Author:   ershov-ilya
+ * GitHub:   https://github.com/ershov-ilya/
+ * About me: http://about.me/ershov.ilya (EN)
+ * Website:  http://ershov.pw/ (RU)
+ * Date: 12.02.2015
+ * Time: 15:43
  */
 
 function dump(arr,level) {
