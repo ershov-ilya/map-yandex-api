@@ -26,10 +26,7 @@
 
 <script type="text/javascript">
     var docState = {id: 1};
-    function initWrap(){
-        MAPCONTROLLER.init();
-    }
-    ymaps.ready(initWrap);
+    ymaps.ready(MAPCONTROLLER.init);
 </script>
 </body>
 </html>

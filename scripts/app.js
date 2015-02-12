@@ -11,12 +11,17 @@ var MAPCONTROLLER = (function(){
     // Private methods and data
     var dataArr={};
 
-    function process() {
-        var myMap = new ymaps.Map('yaMap1', {
+    var config = {
+      domElementID: 'yaMap1',
+        options:     {
             center: [54.957877, 61.184048],
             zoom: 3.8,
             behaviors: ['default', 'scrollZoom']
-        });
+        }
+    };
+
+    function process() {
+        var myMap = new ymaps.Map(config.domElementID, config.options);
         var myMultiGeocoder = new MultiGeocoder({ boundedBy: myMap.getBounds() });
         var i = 0;
         $.each(dataArr, function(item, value) {
@@ -81,7 +86,35 @@ var MAPCONTROLLER = (function(){
         });
     }
 
+    function MultiGeocoder(options) {
+        this._options = options || {};
+    }
+
+    MultiGeocoder.prototype.geocode = function (requests, options) {
+        var self = this,
+            opts = ymaps.util.extend({}, self._options, options),
+            size = requests.length,
+            promise = new ymaps.util.Promise(),
+            result = [],
+            geoObjects = new ymaps.GeoObjectArray();
+
+        requests.forEach(function (request, index) {
+            ymaps.geocode(request, opts).then(
+                function (response) {
+                    var geoObject = response.geoObjects.get(0);
+                    geoObject && (result[index] = geoObject);
+                    --size || (result.forEach(geoObjects.add, geoObjects), promise.resolve({ geoObjects: geoObjects }));
+                },
+                function (err) {
+                    promise.reject(err);
+                }
+            );
+        });
+        return promise;
+    };
+
     var PUBLIC = {
+        // Entry point
         init: function(){
             console.log('MAPCONTROLLER.init() start');
             var url = 'index.php';
@@ -96,30 +129,3 @@ var MAPCONTROLLER = (function(){
     };  // var PUBLIC end
     return PUBLIC;
 })(); // MAPCONTROLLER end
-
-function MultiGeocoder(options) {
-    this._options = options || {};
-}
-
-MultiGeocoder.prototype.geocode = function (requests, options) {
-    var self = this,
-        opts = ymaps.util.extend({}, self._options, options),
-        size = requests.length,
-        promise = new ymaps.util.Promise(),
-        result = [],
-        geoObjects = new ymaps.GeoObjectArray();
-
-    requests.forEach(function (request, index) {
-        ymaps.geocode(request, opts).then(
-            function (response) {
-                var geoObject = response.geoObjects.get(0);
-                geoObject && (result[index] = geoObject);
-                --size || (result.forEach(geoObjects.add, geoObjects), promise.resolve({ geoObjects: geoObjects }));
-            },
-            function (err) {
-                promise.reject(err);
-            }
-        );
-    });
-    return promise;
-};
