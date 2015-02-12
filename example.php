@@ -13,36 +13,12 @@
 <html class="desktop portrait">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link rel="stylesheet" href="style.css" type="text/css">
-    <style type="text/css">
-        #yaMap1 {
-            width: 100%;
-            height: 500px;
-        }
-    </style>
+    <link rel="stylesheet" href="css/style.css" type="text/css">
 </head>
 
 <body oncopy="return false">
-<div class="wrapper-out">
 
-    <!-- chunk /header.v2 -->
-    <div class="wrapper">
-
-
-        <article class="service-page">
-            <div class="left-col">
-
-                <div class="text-block">
-
-
-                    <div class="big" id="yaMap1"></div>
-
-                </div><!--.text-block-->
-            </div><!--.left-col-->
-        </article><!--.service-page-->
-    </div><!--.wrapper-->
-
-</div><!--.wrapper-out-->
+<div class="yaMap" id="yaMap1"></div>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="//api-maps.yandex.ru/2.0/?load=package.standard,package.geoObjects,package.clusters&lang=ru-RU" type="text/javascript"></script>
