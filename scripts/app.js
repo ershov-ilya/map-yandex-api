@@ -118,8 +118,8 @@ var MAPCONTROLLER = (function(){
         // Entry point
         init: function(){
             console.log('MAPCONTROLLER.init() start');
-            var url = 'index.php';
-            if(docState && docState.id) url+='?id='+docState.id;
+            var url = 'index.php?id=550';
+            //if(docInfo && docInfo.id) url+='?id='+docInfo.id;
 
             $.getJSON(url, function( data ) {
                 dataArr=data;
