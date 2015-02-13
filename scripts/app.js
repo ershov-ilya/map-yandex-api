@@ -85,6 +85,8 @@ var MAPCONTROLLER = (function(){
                 }
             );
 
+            PUBLIC.fix();
+
         });
     }
 
@@ -133,6 +135,10 @@ var MAPCONTROLLER = (function(){
             config = $.extend(config, options);
             console.log("config:");
             console.log(config);
+        },
+
+        fix: function(){
+            $('.ymaps-copyrights-pane').remove();
         }
     };  // var PUBLIC end
     return PUBLIC;

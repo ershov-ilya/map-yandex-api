@@ -13,7 +13,7 @@
 <html class="desktop portrait">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="../css/style.css" type="text/css">
 </head>
 
 <body oncopy="return false">
@@ -22,7 +22,7 @@
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="//api-maps.yandex.ru/2.0/?load=package.standard,package.geoObjects,package.clusters&lang=ru-RU" type="text/javascript"></script>
-<script src="scripts/app.js" type="text/javascript"></script>
+<script src="../scripts/app.js" type="text/javascript"></script>
 
 <script type="text/javascript">
     var options = {
