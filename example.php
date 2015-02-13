@@ -26,7 +26,7 @@
 
 <script type="text/javascript">
     var options = {
-//        url: 'index.php',
+        url: '/api/yandex-map/recursive/',
         id: 550
     };
     MAPCONTROLLER.set(options);
