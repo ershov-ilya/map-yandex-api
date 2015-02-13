@@ -1,16 +1,10 @@
 [
   {
-    "caption":"Operating Hours",
+    "caption":"Объект",
     "fields": [
-                {"field":"day",
-                  "caption":"Day"
-                },{
-                  "field":"from",
-                  "caption":"From"
-                },{
-                  "field":"until",
-                  "caption":"Until"
-                }
-              ]
+      {"field":"name", "caption":"Название объекта"},
+      {"field":"address", "caption":"Город и адрес объекта"},
+      {"field":"link", "caption":"Ссылка на объект в пртфолио"}
+    ]
   }
 ]
