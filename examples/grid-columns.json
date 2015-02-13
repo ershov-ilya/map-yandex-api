@@ -1,0 +1,5 @@
+[
+  {"header": "Day", "width": "60", "sortable": "false", "dataIndex": "day"},
+  {"header": "From", "width": "50", "sortable": "false", "dataIndex": "from"},
+  {"header": "Until", "width": "50", "sortable": "false", "dataIndex": "until"}
+]

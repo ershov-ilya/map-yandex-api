@@ -1,0 +1,16 @@
+[
+  {
+    "caption":"Operating Hours",
+    "fields": [
+                {"field":"day",
+                  "caption":"Day"
+                },{
+                  "field":"from",
+                  "caption":"From"
+                },{
+                  "field":"until",
+                  "caption":"Until"
+                }
+              ]
+  }
+]
