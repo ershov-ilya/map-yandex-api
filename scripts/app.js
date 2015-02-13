@@ -13,7 +13,8 @@ var MAPCONTROLLER = (function(){
     var dataArr={};
 
     var config = {
-      domElementID: 'yaMap1',
+        domElementID: 'yaMap1',
+        url: '/api/yandex-map/',
         options:     {
             center: [54.957877, 61.184048],
             zoom: 3.8,
@@ -118,14 +119,20 @@ var MAPCONTROLLER = (function(){
         // Entry point
         init: function(){
             console.log('MAPCONTROLLER.init() start');
-            var url = 'index.php?id=550';
-            //if(docInfo && docInfo.id) url+='?id='+docInfo.id;
+            var url = config.url;
+            if(config && config.id) url+='?id='+config.id;
 
             $.getJSON(url, function( data ) {
                 dataArr=data;
                 //console.log(data);
                 process();
             });
+        },
+
+        set: function(options){
+            config = $.extend(config, options);
+            console.log("config:");
+            console.log(config);
         }
     };  // var PUBLIC end
     return PUBLIC;

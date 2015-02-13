@@ -25,7 +25,11 @@
 <script src="scripts/app.js" type="text/javascript"></script>
 
 <script type="text/javascript">
-    var docState = {id: 1};
+    var options = {
+//        url: 'index.php',
+        id: 550
+    };
+    MAPCONTROLLER.set(options);
     ymaps.ready(MAPCONTROLLER.init);
 </script>
 </body>
