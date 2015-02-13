@@ -9,14 +9,23 @@
  * Time: 13:57
  */
 
+defined('DEBUG') or define('DEBUG', true);
 header('Content-Type: application/json; charset=utf-8');
 //header('Content-Type: text/plain; charset=utf-8');
-//error_reporting(E_ALL);
-//ini_set("display_errors", 1);
-//defined('DEBUG') or define('DEBUG', true);
-?>
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
+
+define('MODX_API_MODE', true);
+require('../../index.php');
+
+$id=0;
+if(isset($_REQUEST['id'])) $id=preg_replace('/[^0-9]/','',$_REQUEST['id']);
+print $id."\n";
+
+/*
 {
 "<a href =\"portfolio/industry/construction-material-production/volsk-cement/\">Реконструкция и модернизация цементного завода ОАО &quot;Вольскцемент&quot;</a>" : "Саратовская область, г. Вольск, ул. Цементников, д. 1",
 "<a href =\"portfolio/commercial-estate/hotel-complexes/volgskaya-rivera/\">Гостиница &quot;Волжская Ривьера&quot;</a>" : "г. Углич, Успенская площадь, д. 8.",
 "<a href =\"portfolio/commercial-estate/hotel-complexes/hampton-by-hilton-volgograd/\">Гостиница HAMPTON BY HILTON VOLGOGRAD</a>" : "г. Волгоград , Центральный р-он, ул. им. Рокоссовского, вл. 51"
 }
+*/

@@ -7,6 +7,7 @@
  * Date: 12.02.2015
  * Time: 15:43
  */
+
 var MAPCONTROLLER = (function(){
     // Private methods and data
     var dataArr={};
