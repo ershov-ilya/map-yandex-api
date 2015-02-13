@@ -9,6 +9,15 @@
  * Time: 15:06
  */
 
+defined('DEBUG') or define('DEBUG', false);
+header('Content-Type: application/json; charset=utf-8');
+//header('Content-Type: text/plain; charset=utf-8');
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
+
+define('MODX_API_MODE', true);
+require('../../../index.php');
+
 function escape_quotes($str){
     $res = preg_replace('/"/','\"',$str);
     return $res;
@@ -19,14 +28,17 @@ function replace_quotes($str){
     return $res;
 }
 
-defined('DEBUG') or define('DEBUG', false);
-header('Content-Type: application/json; charset=utf-8');
-//header('Content-Type: text/plain; charset=utf-8');
-error_reporting(E_ALL);
-ini_set("display_errors", 1);
-
-define('MODX_API_MODE', true);
-require('../../../index.php');
+function recurse($resource){
+    $data = array();
+    $children=$resource->getMany('Children');
+    foreach($children as $child){
+        $subdata = recurse($child);
+        if(!empty($subdata)) $data = array_merge($data, $subdata);
+    }
+    $migx = $resource->getTVValue(54);
+    $data = array_merge(json_decode($migx), $data);
+    return $data;
+}
 
 $id=550;
 if(isset($_REQUEST['id'])) $id=preg_replace('/[^0-9]/','',$_REQUEST['id']);
@@ -35,16 +47,8 @@ if(DEBUG) print '$id='.$id."\n";
 /* @var modX $modx */
 /* @var modResource $resource */
 $resource = $modx->getObject('modResource', $id);
-$migx = $resource->getTVValue(54);
-$data = json_decode($migx);
+$data=recurse($resource);
 
-// Сбор точек из вложенных
-$children=$resource->getMany('Children');
-foreach($children as $child){
-    //$migx[] = $child->getTVValue(54);
-    $migx = $child->getTVValue(54);
-    $data = array_merge($data, json_decode($migx));
-}
 if(DEBUG) print_r($data);
 
 $response_arr = array();
