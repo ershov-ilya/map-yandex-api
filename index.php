@@ -44,43 +44,24 @@ require('../../index.php');
 
 $id=553;
 if(isset($_REQUEST['id'])) $id=preg_replace('/[^0-9]/','',$_REQUEST['id']);
-if(DEBUG) print '$id='.$id."\n";
+//if(DEBUG) print '$id='.$id."\n";
+
+$depth = -1;
+if(isset($_REQUEST['depth'])) $depth=preg_replace('/[^0-9\-]/','',$_REQUEST['depth']);
+
 
 /* @var modX $modx */
 /* @var modResource $resource */
 $resource = $modx->getObject('modResource', $id);
-//$migx = $resource->getTVValue(55);
-//$data = json_decode($migx);
 
-$data=recurse($resource);
-//if(DEBUG) print_r($data);
-
-//$response_arr = array();
-//$i=0;
-//foreach($data as $el)
-//{
-//    $response_arr[$i] = array();
-//    $value = $el->address;
-//
-//    $index='';
-//    if(!empty($el->link)) $index.='<a href="'.$el->link.'">';
-//    $index.=replace_quotes($el->name);
-//    if(!empty($el->link)) $index.='</a>';
-//
-//    $response_arr[$i]['index'] = $index;
-//    $response_arr[$i]['value'] = $value;
-////    $el->link;
-//    $i++;
-//}
-//if(DEBUG) print_r($response_arr);
-
-//exit(0);
+$data=recurse($resource, $depth);
 
 $i=1;
 $size=sizeof($data);
 $response_json = "[\n";
 foreach($data as $el)
 {
+    unset($el->MIGX_id);
     $response_json .= "{ ";
     $j=1;
     $j_size=sizeof((array)$el);
@@ -96,6 +77,7 @@ foreach($data as $el)
 }
 $response_json .= "]\n\n";
 print $response_json;
+
 /*
 {
 "<a href =\"portfolio/industry/construction-material-production/volsk-cement/\">Реконструкция и модернизация цементного завода ОАО &quot;Вольскцемент&quot;</a>" : "Саратовская область, г. Вольск, ул. Цементников, д. 1",
