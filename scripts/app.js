@@ -27,8 +27,12 @@ var MAPCONTROLLER = (function(){
         var myMultiGeocoder = new MultiGeocoder({ boundedBy: myMap.getBounds() });
         var i = 0;
         $.each(dataArr, function(item, value) {
-            var address = value;
-            var ttl = item;
+            var name    = value['name'];
+            var address = value['address'];
+            var link    = value['link'];
+            var service = value['service'];
+            var img     = '/'+value['img'];
+            var ttl     = '<a href ="'+link+'">'+name+'</a>';
 
             // fixedby Pavel. Проблема: дубликаты адресов. Решено ограничением вывода найденных адресов в 1 единицу.
 
@@ -134,7 +138,7 @@ var MAPCONTROLLER = (function(){
             $.getJSON(url, function( data ) {
                 dataArr=data;
                 console.log(data);
-                //process();
+                process();
             });
         },
 

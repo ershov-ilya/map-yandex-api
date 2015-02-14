@@ -27,8 +27,7 @@
 <script type="text/javascript">
     var options = {
         url: '/api/map-yandex-api/',
-        id: 550,
-        depth: -1
+        id: 553
     };
     MAPCONTROLLER.set(options);
     ymaps.ready(MAPCONTROLLER.init);
