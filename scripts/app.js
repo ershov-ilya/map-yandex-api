@@ -13,7 +13,7 @@ var MAPCONTROLLER = (function(){
     var dataArr={};
 
     var config = {
-        domElementID: 'yaMap1',
+        domElementID: 'yaMapHere',
         url: '/api/map-yandex-api/',
         options:     {
             center: [54.957877, 61.184048],
