@@ -16,7 +16,7 @@ var MAPCONTROLLER = (function(){
         domElementID: 'yaMapHere',
         url: '/api/map-yandex-api/',
         options:     {
-            center: [54.957877, 61.184048],
+            center: [61.000000, 61.184048],
             zoom: 3.8,
             behaviors: ['default', 'scrollZoom']
         }
