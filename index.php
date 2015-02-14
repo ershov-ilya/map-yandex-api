@@ -33,6 +33,19 @@ function recurse($resource, $limit=-1, $level=0){
     return $data;
 }
 
+function getServicesArray($root_id, $field='longtitle'){
+    global $modx;
+    $root = $modx->getObject('modResource', $root_id);
+    $children = $root->getMany('Children');
+    $services=array();
+    foreach ($children as $child) {
+        $id = $child->get('id');
+        $title = $child->get($field);
+        $services[$id]=$title;
+    }
+    return $services;
+}
+
 defined('DEBUG') or define('DEBUG', true);
 header('Content-Type: application/json; charset=utf-8');
 //header('Content-Type: text/plain; charset=utf-8');
@@ -48,6 +61,10 @@ if(isset($_REQUEST['id'])) $id=preg_replace('/[^0-9]/','',$_REQUEST['id']);
 
 $depth = -1;
 if(isset($_REQUEST['depth'])) $depth=preg_replace('/[^0-9\-]/','',$_REQUEST['depth']);
+
+// Подготовка массива с названием услуг
+$services=getServicesArray(7);
+//if(DEBUG) print_r($services);
 
 
 /* @var modX $modx */
@@ -66,6 +83,21 @@ foreach($data as $el)
     $j=1;
     $j_size=sizeof((array)$el);
     foreach($el as $key => $val){
+
+        // Подстановка названия услуги
+        if($key=='service'){
+            //$arrServs = explode(',', $val);
+            if(gettype($val) == 'string') $val=$services[$val];
+            if(gettype($val) == 'array') {
+                $multiple_services_array= array();
+                foreach($val as $servEl){
+                    $multiple_services_array[]=$services[$servEl];
+                }
+                $val=implode(' и ', $multiple_services_array);
+            }
+        }
+
+        $val=preg_replace('/"/','\"',$val);
         $response_json .= "\"$key\" : \"$val\"";
         if($j<$j_size) $response_json .= ", ";
         $j++;

@@ -24,8 +24,6 @@ var MAPCONTROLLER = (function(){
 
     function process() {
         var myMap = new ymaps.Map(config.domElementID, config.options);
-        var myMultiGeocoder = new MultiGeocoder({ boundedBy: myMap.getBounds() });
-        var i = 0;
         $.each(dataArr, function(item, value) {
             var name    = value['name'];
             var address = value['address'];
@@ -34,16 +32,7 @@ var MAPCONTROLLER = (function(){
             var img     = '/'+value['img'];
             var ttl     = '<a href ="'+link+'">'+name+'</a>';
 
-            // fixedby Pavel. Проблема: дубликаты адресов. Решено ограничением вывода найденных адресов в 1 единицу.
-
-            //var myGeocoder = ymaps.geocode(address); тут геокодер находил несколько адресов,
-            //которые прокручивал в res.geoObjects, потому было несколько меток на карте с одним и тем же адресом.
-
             var myGeocoder = ymaps.geocode(address,{ results : 1 });
-
-            // endoffix;
-
-
             myGeocoder.then(
                 function (res) {
                     res.geoObjects.each(function (geoObject) {
@@ -93,33 +82,6 @@ var MAPCONTROLLER = (function(){
 
         });
     }
-
-    function MultiGeocoder(options) {
-        this._options = options || {};
-    }
-
-    MultiGeocoder.prototype.geocode = function (requests, options) {
-        var self = this,
-            opts = ymaps.util.extend({}, self._options, options),
-            size = requests.length,
-            promise = new ymaps.util.Promise(),
-            result = [],
-            geoObjects = new ymaps.GeoObjectArray();
-
-        requests.forEach(function (request, index) {
-            ymaps.geocode(request, opts).then(
-                function (response) {
-                    var geoObject = response.geoObjects.get(0);
-                    geoObject && (result[index] = geoObject);
-                    --size || (result.forEach(geoObjects.add, geoObjects), promise.resolve({ geoObjects: geoObjects }));
-                },
-                function (err) {
-                    promise.reject(err);
-                }
-            );
-        });
-        return promise;
-    };
 
     var PUBLIC = {
         // Entry point
