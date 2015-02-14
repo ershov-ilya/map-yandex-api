@@ -108,7 +108,7 @@ var MAPCONTROLLER = (function(){
             var url = config.url;
             var params = [];
             if(config && config.id) params.push('id='+config.id);
-            if(config && config.depth) params.push('depth='+config.depth);
+            if(config && config.depth !== undefined) params.push('depth='+config.depth);
             if(params.length>0){
                 url += '?' + params.join('&');
             }
