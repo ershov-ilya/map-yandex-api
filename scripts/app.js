@@ -14,7 +14,7 @@ var MAPCONTROLLER = (function(){
 
     var config = {
         domElementID: 'yaMap1',
-        url: '/api/yandex-map/',
+        url: '/api/map-yandex-api/',
         options:     {
             center: [54.957877, 61.184048],
             zoom: 3.8,
@@ -23,22 +23,40 @@ var MAPCONTROLLER = (function(){
     };
 
     function process() {
+        // Инициализация карты
         var myMap = new ymaps.Map(config.domElementID, config.options);
+
+        // Перебор каждой точки
         $.each(dataArr, function(item, value) {
-            var name    = value['name'];
-            var address = value['address'];
-            var link    = value['link'];
-            var service = value['service'];
-            var img     = '/'+value['img'];
-            var ttl     = '<a href ="'+link+'">'+name+'</a>';
+            var name    = value['name'] || '';
+            var address = value['address'] || '';
+            var link    = value['link'] || '';
+            var service = value['service'] || '';
+            var img     = value['img'] || '';
+            if(img) img = '/'+img;
+            // Формирование хедера балона
+            var balloonContentHeader     = '<a href ="'+link+'" class="yandex-map-bubble-link">'+name+'</a>';
+
+            // Формирование контента балона
+            var balloonContentBody = '';
+            if(img) {
+                balloonContentBody += '<a href ="' + link + '">';
+                balloonContentBody += '<img src="' + img + '" class="yandex-map-bubble-img">';
+                balloonContentBody += '</a>';
+            }
+            balloonContentBody += '<div class="yandex-map-bubble-desc">';
+            balloonContentBody += address;
+            if(service)  balloonContentBody += '<br><small class="yandex-map-bubble-small"> Услуга: '+service+'</small>';
+            balloonContentBody += '</div>';
+
 
             var myGeocoder = ymaps.geocode(address,{ results : 1 });
             myGeocoder.then(
                 function (res) {
                     res.geoObjects.each(function (geoObject) {
                         var data = geoObject.properties.getAll();
-                        geoObject.properties.set('balloonContentHeader', ttl );
-                        geoObject.properties.set('balloonContentBody', '<p>' + address + '</p>' );
+                        geoObject.properties.set('balloonContentHeader', balloonContentHeader );
+                        geoObject.properties.set('balloonContentBody', balloonContentBody );
                         geoObject.options.set('iconImageHref','/images/marker.png');
                     });
                     // Переменная с описанием двух видов иконок кластеров.
@@ -95,19 +113,19 @@ var MAPCONTROLLER = (function(){
                 url += '?' + params.join('&');
             }
 
-            console.log(url);
+            //console.log(url);
 
             $.getJSON(url, function( data ) {
                 dataArr=data;
-                console.log(data);
+                //console.log(data);
                 process();
             });
         },
 
         set: function(options){
             config = $.extend(config, options);
-            console.log("config:");
-            console.log(config);
+            //console.log("config:");
+            //console.log(config);
         },
 
         fix: function(){
