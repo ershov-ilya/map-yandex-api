@@ -122,12 +122,19 @@ var MAPCONTROLLER = (function(){
         init: function(){
             console.log('MAPCONTROLLER.init() start');
             var url = config.url;
-            if(config && config.id) url+='?id='+config.id;
+            var params = [];
+            if(config && config.id) params.push('id='+config.id);
+            if(config && config.depth) params.push('depth='+config.depth);
+            if(params.length>0){
+                url += '?' + params.join('&');
+            }
+
+            console.log(url);
 
             $.getJSON(url, function( data ) {
                 dataArr=data;
-                //console.log(data);
-                process();
+                console.log(data);
+                //process();
             });
         },
 

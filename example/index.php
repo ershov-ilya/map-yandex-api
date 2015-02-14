@@ -26,8 +26,9 @@
 
 <script type="text/javascript">
     var options = {
-        url: '/api/yandex-map/recursive/',
-        id: 550
+        url: '/api/map-yandex-api/',
+        id: 550,
+        depth: -1
     };
     MAPCONTROLLER.set(options);
     ymaps.ready(MAPCONTROLLER.init);
