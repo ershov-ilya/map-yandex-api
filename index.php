@@ -19,7 +19,21 @@ function replace_quotes($str){
     return $res;
 }
 
-defined('DEBUG') or define('DEBUG', false);
+function recurse($resource, $limit=0, $level=0){
+    $data = array();
+    if($limit==0 || $level<$limit) {
+        $children = $resource->getMany('Children');
+        foreach ($children as $child) {
+            $subdata = recurse($child, $limit, $level + 1);
+            if (!empty($subdata)) $data = array_merge($data, $subdata);
+        }
+    }
+    $migx = $resource->getTVValue(54);
+    $data = array_merge(json_decode($migx), $data);
+    return $data;
+}
+
+defined('DEBUG') or define('DEBUG', true);
 header('Content-Type: application/json; charset=utf-8');
 //header('Content-Type: text/plain; charset=utf-8');
 error_reporting(E_ALL);
@@ -28,16 +42,17 @@ ini_set("display_errors", 1);
 define('MODX_API_MODE', true);
 require('../../index.php');
 
-$id=550;
+$id=553;
 if(isset($_REQUEST['id'])) $id=preg_replace('/[^0-9]/','',$_REQUEST['id']);
 if(DEBUG) print '$id='.$id."\n";
 
 /* @var modX $modx */
 /* @var modResource $resource */
 $resource = $modx->getObject('modResource', $id);
-$migx = $resource->getTVValue(54);
+$migx = $resource->getTVValue(55);
 $data = json_decode($migx);
 if(DEBUG) print_r($data);
+exit(0);
 
 $response_arr = array();
 $i=0;

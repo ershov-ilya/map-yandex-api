@@ -4,7 +4,9 @@
     "fields": [
       {"field":"name", "caption":"Название объекта"},
       {"field":"address", "caption":"Город и адрес объекта"},
-      {"field":"link", "caption":"Ссылка на объект в пртфолио"}
+      {"field":"link", "caption":"Ссылка на объект в портфолио"},
+      {"field":"service", "caption":"Название услуги","inputTV":"services"},
+      {"field":"img", "caption":"Картинка","inputTV":"foto-article"}
     ]
   }
 ]

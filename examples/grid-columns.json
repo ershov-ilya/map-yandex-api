@@ -1,5 +1,7 @@
 [
   {"header": "Название", "width": "60", "sortable": "false", "dataIndex": "name"},
   {"header": "Адрес", "width": "50", "sortable": "false", "dataIndex": "address"},
-  {"header": "Ссылка", "width": "50", "sortable": "false", "dataIndex": "link"}
+  {"header": "Ссылка", "width": "50", "sortable": "false", "dataIndex": "link"},
+  {"header": "Картинка", "width": "50", "sortable": "false", "dataIndex": "img"},
+  {"header": "Услуга", "width": "50", "sortable": "false", "dataIndex": "service"}
 ]
