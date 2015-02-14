@@ -9,6 +9,17 @@
  * Time: 13:57
  */
 
+defined('DEBUG') or define('DEBUG', true);
+header('Content-Type: application/json; charset=utf-8');
+//header('Content-Type: text/plain; charset=utf-8');
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
+
+define('MODX_API_MODE', true);
+require('../../index.php');
+
+
+
 function escape_quotes($str){
     $res = preg_replace('/"/','\"',$str);
     return $res;
@@ -29,7 +40,7 @@ function recurse($resource, $limit=-1, $level=0){
         }
     }
     $migx = $resource->getTVValue(55);
-    $data = array_merge(json_decode($migx), $data);
+    if(!empty($migx)) $data = array_merge(json_decode($migx), $data);
     return $data;
 }
 
@@ -46,18 +57,8 @@ function getServicesArray($root_id, $field='longtitle'){
     return $services;
 }
 
-defined('DEBUG') or define('DEBUG', true);
-header('Content-Type: application/json; charset=utf-8');
-//header('Content-Type: text/plain; charset=utf-8');
-error_reporting(E_ALL);
-ini_set("display_errors", 1);
-
-define('MODX_API_MODE', true);
-require('../../index.php');
-
-$id=553;
+$id=0;
 if(isset($_REQUEST['id'])) $id=preg_replace('/[^0-9]/','',$_REQUEST['id']);
-//if(DEBUG) print '$id='.$id."\n";
 
 $depth = -1;
 if(isset($_REQUEST['depth'])) $depth=preg_replace('/[^0-9\-]/','',$_REQUEST['depth']);
