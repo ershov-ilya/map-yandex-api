@@ -41,7 +41,7 @@ var MAPCONTROLLER = (function(){
             var balloonContentBody = '';
             if(img) {
                 balloonContentBody += '<a href ="' + link + '">';
-                balloonContentBody += '<img src="' + img + '" class="yandex-map-bubble-img">';
+                balloonContentBody += '<img src="' + img + '" class="yandex-map-bubble-img force-gray">';
                 balloonContentBody += '</a>';
             }
             balloonContentBody += '<div class="yandex-map-bubble-desc">';
