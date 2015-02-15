@@ -43,6 +43,12 @@ function checkCache($cache_filename, $cache_age_limit)
     $CACHE=array();
     $CACHE['content']='';
     $CACHE['need_refresh']=0;
+
+    if(isset($_GET['re'])) {
+        $CACHE['need_refresh']=1;
+        return $CACHE;
+    }
+
     if(is_file($cache_filename))
     {
         $filetime= filemtime($cache_filename);
