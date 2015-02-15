@@ -44,6 +44,7 @@ if(CACHE_ENABLE) {
 /* @var modResource $resource */
 if(empty($id)) {print "[]"; exit(0); }
 $resource = $modx->getObject('modResource', $id);
+if($resource==NULL) {print "[]"; exit(0); }
 
 $data=recurse($resource, $depth);
 
