@@ -10,6 +10,9 @@
  */
 
 defined('DEBUG') or define('DEBUG', true);
+defined('CACHE_ENABLE') or define('CACHE_ENABLE', true);
+defined('CACHE_PATH') or define('CACHE_PATH', 'cache/');
+
 header('Content-Type: application/json; charset=utf-8');
 //header('Content-Type: text/plain; charset=utf-8');
 error_reporting(E_ALL);
@@ -18,50 +21,16 @@ ini_set("display_errors", 1);
 define('MODX_API_MODE', true);
 require('../../index.php');
 
+require "functions.php";
 
-
-function escape_quotes($str){
-    $res = preg_replace('/"/','\"',$str);
-    return $res;
-}
-
-function replace_quotes($str){
-    $res = preg_replace('/"/','&quot;',$str);
-    return $res;
-}
-
-function recurse($resource, $limit=-1, $level=0){
-    $data = array();
-    if($limit<0 || $level<$limit) {
-        $children = $resource->getMany('Children');
-        foreach ($children as $child) {
-            $subdata = recurse($child, $limit, $level + 1);
-            if (!empty($subdata)) $data = array_merge($data, $subdata);
-        }
-    }
-    $migx = $resource->getTVValue(55);
-    if(!empty($migx)) $data = array_merge(json_decode($migx), $data);
-    return $data;
-}
-
-function getServicesArray($root_id, $field='longtitle'){
-    global $modx;
-    $root = $modx->getObject('modResource', $root_id);
-    $children = $root->getMany('Children');
-    $services=array();
-    foreach ($children as $child) {
-        $id = $child->get('id');
-        $title = $child->get($field);
-        $services[$id]=$title;
-    }
-    return $services;
-}
-
+// Приём параметров
 $id=0;
 if(isset($_REQUEST['id'])) $id=preg_replace('/[^0-9]/','',$_REQUEST['id']);
-
 $depth = -1;
 if(isset($_REQUEST['depth'])) $depth=preg_replace('/[^0-9\-]/','',$_REQUEST['depth']);
+$cache_filename = CACHE_PATH."id$id"."_dep$depth".".cache.json";
+
+
 
 // Подготовка массива с названием услуг
 $services=getServicesArray(7);
@@ -109,6 +78,10 @@ foreach($data as $el)
     $i++;
 }
 $response_json .= "]\n\n";
+
+// Cache save
+file_put_contents($cache_filename, $response_json);
+
 print $response_json;
 
 /*
