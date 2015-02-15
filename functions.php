@@ -45,7 +45,6 @@ function checkCache($cache_filename, $cache_age_limit)
     $CACHE['need_refresh']=0;
     if(is_file($cache_filename))
     {
-        print "File found\n";
         $filetime= filemtime($cache_filename);
         $curtime=time();
         $CACHE['age']=$curtime-$filetime;

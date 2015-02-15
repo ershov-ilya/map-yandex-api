@@ -31,9 +31,8 @@ if(isset($_REQUEST['depth'])) $depth=preg_replace('/[^0-9\-]/','',$_REQUEST['dep
 
 // Проверка кэша
 $cache_filename = CACHE_PATH."id$id"."_dep$depth".".cache.json";
-$cache = checkCache($cache_filename, 3600);
-print_r($cache);
-exit(0);
+$cache = checkCache($cache_filename, 3000);
+if(!empty($cache['content'])) { print $cache['content']; exit(0); }
 
 // Подготовка массива с названием услуг
 $services=getServicesArray(7);
