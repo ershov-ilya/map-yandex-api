@@ -12,7 +12,7 @@
 defined('DEBUG') or define('DEBUG', true);
 defined('CACHE_ENABLE') or define('CACHE_ENABLE', true);
 defined('CACHE_PATH') or define('CACHE_PATH', 'cache/');
-defined('CACHE_TIME') or define('CACHE_TIME', 3600);
+defined('CACHE_TIME') or define('CACHE_TIME', 60);
 
 header('Content-Type: application/json; charset=utf-8');
 //header('Content-Type: text/plain; charset=utf-8');
