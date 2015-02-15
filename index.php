@@ -12,6 +12,7 @@
 defined('DEBUG') or define('DEBUG', true);
 defined('CACHE_ENABLE') or define('CACHE_ENABLE', true);
 defined('CACHE_PATH') or define('CACHE_PATH', 'cache/');
+defined('CACHE_TIME') or define('CACHE_TIME', 3600);
 
 header('Content-Type: application/json; charset=utf-8');
 //header('Content-Type: text/plain; charset=utf-8');
@@ -30,14 +31,14 @@ $depth = -1;
 if(isset($_REQUEST['depth'])) $depth=preg_replace('/[^0-9\-]/','',$_REQUEST['depth']);
 
 // Проверка кэша
-$cache_filename = CACHE_PATH."id$id"."_dep$depth".".cache.json";
-$cache = checkCache($cache_filename, 3000);
-if(!empty($cache['content'])) { print $cache['content']; exit(0); }
-
-// Подготовка массива с названием услуг
-$services=getServicesArray(7);
-//if(DEBUG) print_r($services);
-
+if(CACHE_ENABLE) {
+    $cache_filename = CACHE_PATH . "id$id" . "_dep$depth" . ".cache.json";
+    $cache = checkCache($cache_filename, CACHE_TIME);
+    if (!empty($cache['content'])) {
+        print $cache['content'];
+        exit(0);
+    }
+}
 
 /* @var modX $modx */
 /* @var modResource $resource */
@@ -45,6 +46,10 @@ if(empty($id)) {print "[]"; exit(0); }
 $resource = $modx->getObject('modResource', $id);
 
 $data=recurse($resource, $depth);
+
+// Подготовка массива с названием услуг
+$services=getServicesArray(7);
+
 
 $i=1;
 $size=sizeof($data);
@@ -83,7 +88,9 @@ foreach($data as $el)
 $response_json .= "]\n\n";
 
 // Cache save
-file_put_contents($cache_filename, $response_json);
+if(CACHE_ENABLE) {
+    file_put_contents($cache_filename, $response_json);
+}
 
 print $response_json;
 
