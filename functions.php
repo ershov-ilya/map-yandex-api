@@ -39,21 +39,22 @@ function getServicesArray($root_id, $field='longtitle'){
 
 function checkCache($cache_filename, $cache_age_limit)
 {
+//    print '$cache_filename: '.$cache_filename."\n";
     $CACHE=array();
-    $CACHE['need_refresh']=false;
     $CACHE['content']='';
+    $CACHE['need_refresh']=0;
     if(is_file($cache_filename))
     {
+        print "File found\n";
         $filetime= filemtime($cache_filename);
         $curtime=time();
-        $cache_file_age=$curtime-$filetime;
-        //print $cache_file_age;
-        if($cache_file_age>$cache_age_limit) $CACHE['need_refresh']=true;
+        $CACHE['age']=$curtime-$filetime;
+        //print $CACHE['age'];
+        if($CACHE['age']>$cache_age_limit) $CACHE['need_refresh']=1;
     }
-    else $CACHE['need_refresh']=true;
+    else $CACHE['need_refresh']=1;
 
-    if($CACHE['need_refresh']) return '';
-    else
+    if(!$CACHE['need_refresh'])
     {
         //print "Read from cache";
         // Read from cache

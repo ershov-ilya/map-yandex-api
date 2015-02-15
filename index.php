@@ -28,9 +28,12 @@ $id=0;
 if(isset($_REQUEST['id'])) $id=preg_replace('/[^0-9]/','',$_REQUEST['id']);
 $depth = -1;
 if(isset($_REQUEST['depth'])) $depth=preg_replace('/[^0-9\-]/','',$_REQUEST['depth']);
+
+// Проверка кэша
 $cache_filename = CACHE_PATH."id$id"."_dep$depth".".cache.json";
-
-
+$cache = checkCache($cache_filename, 3600);
+print_r($cache);
+exit(0);
 
 // Подготовка массива с названием услуг
 $services=getServicesArray(7);
@@ -39,6 +42,7 @@ $services=getServicesArray(7);
 
 /* @var modX $modx */
 /* @var modResource $resource */
+if(empty($id)) {print "[]"; exit(0); }
 $resource = $modx->getObject('modResource', $id);
 
 $data=recurse($resource, $depth);
