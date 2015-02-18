@@ -25,6 +25,7 @@ var MAPCONTROLLER = (function(){
     function process() {
         // Инициализация карты
         var myMap = new ymaps.Map(config.domElementID, config.options);
+        PUBLIC.fix();
 
         // Перебор каждой точки
         $.each(dataArr, function(item, value) {
@@ -33,7 +34,7 @@ var MAPCONTROLLER = (function(){
             var link    = value['link'] || '';
             var service = value['service'] || '';
             var img     = value['img'] || '';
-            if(img) img = '/'+img;
+            if(img) img = '/assets/img/'+img;
             // Формирование хедера балона
             var balloonContentHeader     = '<a href ="'+link+'" class="yandex-map-bubble-link">'+name+'</a>';
 
@@ -46,7 +47,7 @@ var MAPCONTROLLER = (function(){
             }
             balloonContentBody += '<div class="yandex-map-bubble-desc">';
             balloonContentBody += address;
-            if(service)  balloonContentBody += '<br><small class="yandex-map-bubble-small"> Услуга: '+service+'</small>';
+            if(service)  balloonContentBody += '<br><small class="yandex-map-bubble-small">Оказанные услуги: '+service+'</small>';
             balloonContentBody += '</div>';
 
 
@@ -95,8 +96,6 @@ var MAPCONTROLLER = (function(){
                     alert(err);
                 }
             );
-
-            PUBLIC.fix();
 
         });
     }

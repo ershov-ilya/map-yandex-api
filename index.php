@@ -49,7 +49,7 @@ if($resource==NULL) {print "[]"; exit(0); }
 $data=recurse($resource, $depth);
 
 // Подготовка массива с названием услуг
-$services=getServicesArray(7);
+$services=getServicesArray(556);
 
 
 $i=1;
@@ -72,7 +72,7 @@ foreach($data as $el)
                 foreach($val as $servEl){
                     $multiple_services_array[]=$services[$servEl];
                 }
-                $val=implode(' и ', $multiple_services_array);
+                $val=implode(', ', $multiple_services_array);
             }
         }
 

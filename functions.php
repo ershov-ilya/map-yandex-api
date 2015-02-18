@@ -24,7 +24,7 @@ function recurse($resource, $limit=-1, $level=0){
     return $data;
 }
 
-function getServicesArray($root_id, $field='longtitle'){
+function getServicesArray($root_id, $field='pagetitle'){
     global $modx;
     $root = $modx->getObject('modResource', $root_id);
     $children = $root->getMany('Children');
