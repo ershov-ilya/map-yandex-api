@@ -36,7 +36,7 @@ var MAPCONTROLLER = (function(){
             var img     = value['img'] || '';
             if(img) img = '/assets/img/'+img;
             // Формирование хедера балона
-            var balloonContentHeader     = '<a href ="'+link+'" class="yandex-map-bubble-link">'+name+'</a>';
+            var balloonContentHeader     = '';
 
             // Формирование контента балона
             var balloonContentBody = '';
@@ -46,8 +46,10 @@ var MAPCONTROLLER = (function(){
                 balloonContentBody += '</a>';
             }
             balloonContentBody += '<div class="yandex-map-bubble-desc">';
-            balloonContentBody += address;
+            balloonContentBody += '<a href ="'+link+'" class="yandex-map-bubble-link">'+name+'</a>'; 
             if(service)  balloonContentBody += '<br><small class="yandex-map-bubble-small">Оказанные услуги: '+service+'</small>';
+            balloonContentBody += '<div class="line-point"></div>';
+            balloonContentBody += address;
             balloonContentBody += '</div>';
 
 
