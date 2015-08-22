@@ -14,11 +14,12 @@
 <script src="scripts/app.js" type="text/javascript"></script>
 
 <script type="text/javascript">
-  var json_abs_url=window.location.href;
-  json_abs_url=json_abs_url.replace(/index.htm$/i,'');
-  json_abs_url+='examples/data.json';
+  var abs_url=window.location.href;
+  abs_url=abs_url.replace(/index.htm$/i,'');
+  var data_json_abs_url=abs_url+'examples/data.json';
+  var marker_abs_url=abs_url+'img/marker.png';
 
-  MAPCONTROLLER.set({ url: json_abs_url, debug: true });
+  MAPCONTROLLER.set({ url: data_json_abs_url, debug: true, marker: marker_abs_url});
   //MAPCONTROLLER.set({ id: 553 });
   ymaps.ready(MAPCONTROLLER.init);
 </script>

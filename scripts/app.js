@@ -15,6 +15,7 @@ var MAPCONTROLLER = (function(){
     var config = {
         domElementID: 'yaMapHere',
         url: '/api/map-yandex-api/',
+        marker: '/images/marker.png',
         debug: false,
         options:     {
             center: [61.000000, 61.184048],
@@ -61,7 +62,7 @@ var MAPCONTROLLER = (function(){
                         var data = geoObject.properties.getAll();
                         geoObject.properties.set('balloonContentHeader', balloonContentHeader );
                         geoObject.properties.set('balloonContentBody', balloonContentBody );
-                        geoObject.options.set('iconImageHref','/images/marker.png');
+                        geoObject.options.set('iconImageHref',config.marker);
                     });
                     // Переменная с описанием двух видов иконок кластеров.
                     var clusterIcons = [
@@ -115,7 +116,8 @@ var MAPCONTROLLER = (function(){
                 url += '?' + params.join('&');
             }
 
-            if(config.debug) console.log(url);
+            if(config.debug) console.log('Data url:'+url);
+            if(config.debug) console.log('Marker url:'+config.marker);
 
             $.getJSON(url, function( data ) {
                 dataArr=data;
