@@ -121,7 +121,7 @@ var MAPCONTROLLER = (function(){
 
             $.getJSON(url, function( data ) {
                 dataArr=data;
-                if(config.debug) console.log(data);
+                if(config.debug) console.log(dataArr);
                 process();
             });
         },
