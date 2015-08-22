@@ -15,6 +15,7 @@ var MAPCONTROLLER = (function(){
     var config = {
         domElementID: 'yaMapHere',
         url: '/api/map-yandex-api/',
+        debug: false,
         options:     {
             center: [61.000000, 61.184048],
             zoom: 3.8,
@@ -114,11 +115,11 @@ var MAPCONTROLLER = (function(){
                 url += '?' + params.join('&');
             }
 
-            //console.log(url);
+            if(config.debug) console.log(url);
 
             $.getJSON(url, function( data ) {
                 dataArr=data;
-                //console.log(data);
+                if(config.debug) console.log(data);
                 process();
             });
         },
