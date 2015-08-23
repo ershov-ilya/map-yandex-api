@@ -1,4 +1,4 @@
-[
+﻿[
   { "name" : "Архангельск", "address" : "Россия, г. Архангельск", "link" : "/", "service" : "", "img" : "http://www.severindevelopment.ru/assets/img/img/doroga/5.jpg" },
   { "name" : "Питер", "address" : "Россия, г. Санкт-Петербург", "link" : "/", "service" : "", "img" : "http://www.severindevelopment.ru/assets/img/content/1.jpg" },
   { "name" : "Москва", "address" : "Россия, г. Москва", "link" : "/", "service" : "", "img" : "http://www.severindevelopment.ru/assets/img/img/doroga/5.jpg" },
