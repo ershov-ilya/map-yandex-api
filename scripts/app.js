@@ -31,12 +31,13 @@ var MAPCONTROLLER = (function(){
 
         // Перебор каждой точки
         $.each(dataArr, function(item, value) {
+            // Чтение значений из массива данных
             var name    = value['name'] || '';
             var address = value['address'] || '';
             var link    = value['link'] || '';
             var service = value['service'] || '';
             var img     = value['img'] || '';
-            //if(img) img = '/assets/img/'+img;
+
             // Формирование хедера балона
             var balloonContentHeader     = '';
 
