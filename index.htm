@@ -19,7 +19,13 @@
   var data_json_abs_url=abs_url+'examples/example.json';
   var marker_abs_url=abs_url+'img/marker.png';
 
-  MAPCONTROLLER.set({ url: data_json_abs_url, debug: true, marker: marker_abs_url});
+  var map_config={
+    debug: true,
+    url: data_json_abs_url,
+    marker: marker_abs_url
+  };
+
+  MAPCONTROLLER.set(map_config);
   //MAPCONTROLLER.set({ id: 553 });
   ymaps.ready(MAPCONTROLLER.init);
 </script>

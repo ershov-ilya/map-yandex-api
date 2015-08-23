@@ -107,7 +107,7 @@ var MAPCONTROLLER = (function(){
     var PUBLIC = {
         // Entry point
         init: function(){
-            console.log('MAPCONTROLLER.init() start');
+            if(config.debug) console.log('MAPCONTROLLER.init() start');
             var url = config.url;
             var params = [];
             if(config && config.id) params.push('id='+config.id);
@@ -128,8 +128,10 @@ var MAPCONTROLLER = (function(){
 
         set: function(options){
             config = $.extend(config, options);
-            //console.log("config:");
-            //console.log(config);
+            if(config.debug) {
+                console.log("config:");
+                console.log(config);
+            }
         },
 
         fix: function(){
