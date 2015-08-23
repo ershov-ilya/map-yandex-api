@@ -22,7 +22,6 @@ ini_set("display_errors", 1);
 
 define('MODX_API_MODE', true);
 require_once('../../../index.php');
-
 require_once("functions.php");
 
 // Приём параметров
@@ -45,7 +44,7 @@ if(CACHE_ENABLE) {
 /* @var modResource $resource */
 if(empty($id)) {print "[]"; exit(0); }
 $resource = $modx->getObject('modResource', $id);
-if($resource==NULL) {print "[]"; exit(0); }
+if($resource==NULL) { die("[]"); }
 
 $data=recurse($resource, $depth);
 
