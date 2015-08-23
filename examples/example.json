@@ -1,0 +1,6 @@
+[
+  { "name" : "Архангельск", "address" : "Россия, г. Архангельск", "link" : "/", "service" : "", "img" : "http://www.severindevelopment.ru/assets/img/img/doroga/5.jpg" },
+  { "name" : "Питер", "address" : "Россия, г. Санкт-Петербург", "link" : "/", "service" : "", "img" : "http://www.severindevelopment.ru/assets/img/content/1.jpg" },
+  { "name" : "Москва", "address" : "Россия, г. Москва", "link" : "/", "service" : "", "img" : "http://www.severindevelopment.ru/assets/img/img/doroga/5.jpg" },
+  { "name" : "Зеленоград", "address" : "Московская обл., Зеленоград", "link" : "/", "service" : ", ", "img" : "http://www.severindevelopment.ru/assets/img/resourceimages/337/297ca2348758bff9697a417c3291b4ec.jpg" }
+]

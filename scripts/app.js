@@ -36,7 +36,7 @@ var MAPCONTROLLER = (function(){
             var link    = value['link'] || '';
             var service = value['service'] || '';
             var img     = value['img'] || '';
-            if(img) img = '/assets/img/'+img;
+            //if(img) img = '/assets/img/'+img;
             // Формирование хедера балона
             var balloonContentHeader     = '';
 
