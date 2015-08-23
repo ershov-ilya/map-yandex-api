@@ -9,7 +9,8 @@
  * Time: 13:57
  */
 
-defined('DEBUG') or define('DEBUG', true);
+if(isset($_GET['t'])) define('DEBUG', true);
+defined('DEBUG') or define('DEBUG', false);
 defined('CACHE_ENABLE') or define('CACHE_ENABLE', false);
 defined('CACHE_PATH') or define('CACHE_PATH', 'cache/');
 defined('CACHE_TIME') or define('CACHE_TIME', 60);
@@ -20,9 +21,9 @@ error_reporting(E_ALL);
 ini_set("display_errors", 1);
 
 define('MODX_API_MODE', true);
-require('../../index.php');
+require_once('../../../index.php');
 
-require "functions.connector";
+require_once("functions.php");
 
 // Приём параметров
 $id=0;
