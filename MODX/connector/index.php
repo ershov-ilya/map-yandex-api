@@ -22,7 +22,7 @@ ini_set("display_errors", 1);
 define('MODX_API_MODE', true);
 require('../../index.php');
 
-require "functions.php";
+require "functions.connector";
 
 // Приём параметров
 $id=0;
